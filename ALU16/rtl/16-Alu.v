@@ -1,94 +1,72 @@
-`timescale 1ns / 1ps
-
-module alu16(
+module alu_16bit (
     input  [15:0] A,
     input  [15:0] B,
-    input  [3:0]  ALU_Sel,
+    input  [2:0]  op,
 
-    output reg [15:0] ALU_Out,
-    output reg        Carry,
-    output reg        Overflow,
-    output            Zero
+    output reg [15:0] out,
+    output reg        carry,
+    output reg        zero,
+    output reg        sign,
+    output reg        parity
 );
-reg [16:0] Temp;
 
 always @(*) begin
 
-    // Default values
-    ALU_Out = 16'd0;
-    Carry   = 1'b0;
-    Overflow = 1'b0;
-    Temp    = 17'd0;
-
-    case(ALU_Sel)
+    case(op)
 
         // Addition
-        4'b0000: begin
-            Temp = {1'b0, A} + {1'b0, B};
-            ALU_Out = Temp[15:0];
-            Carry = Temp[16];
-
-            // Signed overflow
-            Overflow = (~(A[15] ^ B[15])) &
-                       (ALU_Out[15] ^ A[15]);
+        3'b000: begin
+            {carry, out} = A + B;
         end
 
         // Subtraction
-        4'b0001: begin
-            ALU_Out = A - B;
-
-            // Borrow indication
-            Carry = (A < B);
-
-            // Signed overflow
-            Overflow = (A[15] ^ B[15]) &
-                       (ALU_Out[15] ^ A[15]);
+        3'b001: begin
+            {carry, out} = A - B;
         end
 
         // AND
-        4'b0010: begin
-            ALU_Out = A & B;
+        3'b010: begin
+            out = A & B;
         end
 
         // OR
-        4'b0011: begin
-            ALU_Out = A | B;
+        3'b011: begin
+            out = A | B;
         end
 
         // XOR
-        4'b0100: begin
-            ALU_Out = A ^ B;
+        3'b100: begin
+            out = A ^ B;
         end
 
-        // NOT
-        4'b0101: begin
-            ALU_Out = ~A;
+        // NOT A
+        3'b101: begin
+            out = ~A;
         end
 
-        // Left Shift
-        4'b0110: begin
-            Carry = A[15];
-            ALU_Out = A << 1;
+        // Increment A
+        3'b110: begin
+            {carry, out} = A + 1;
         end
 
-        // Right Shift
-        4'b0111: begin
-            Carry = A[0];
-            ALU_Out = A >> 1;
+        // Decrement A
+        3'b111: begin
+            {carry, out} = A - 1;
         end
 
-        // Compare
-        4'b1000: begin
-            ALU_Out = (A < B) ? 16'd1 : 16'd0;
-        end
-
+        // Default
         default: begin
-            ALU_Out = 16'd0;
+            out = 16'b0;
+            carry = 1'b0;
         end
 
     endcase
-end
 
-assign Zero = (ALU_Out == 16'd0);
+    // Flags
+    zero   = ~( |out );
+    sign   = out[15];
+    parity = ~^out;
+
+end
 
 endmodule
