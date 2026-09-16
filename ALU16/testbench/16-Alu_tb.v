@@ -1,133 +1,92 @@
-`timescale 1ns / 1ps
+`timescale 1ns/1ps
 
-module alu16_tb;
+module alu_16bit_tb;
 
 reg [15:0] A;
 reg [15:0] B;
-reg [3:0] ALU_Sel;
+reg [2:0]  op;
 
-wire [15:0] ALU_Out;
-wire Carry;
-wire Overflow;
-wire Zero;
+wire [15:0] out;
+wire        carry;
+wire        zero;
+wire        sign;
+wire        parity;
 
-alu16 uut (
+alu_16bit uut (
     .A(A),
     .B(B),
-    .ALU_Sel(ALU_Sel),
-    .ALU_Out(ALU_Out),
-    .Carry(Carry),
-    .Overflow(Overflow),
-    .Zero(Zero)
+    .op(op),
+    .out(out),
+    .carry(carry),
+    .zero(zero),
+    .sign(sign),
+    .parity(parity)
 );
 
 initial begin
 
-    // Display results in simulator console
-    $monitor("Time=%0t | A=%h | B=%h | Sel=%b | Out=%h | Carry=%b | Overflow=%b | Zero=%b",
-             $time, A, B, ALU_Sel, ALU_Out, Carry, Overflow, Zero);
-
-    // --------------------------------
-    // Basic Operations
-    // --------------------------------
-
-    A = 16'd20;
-    B = 16'd10;
+    $monitor("Time=%0t A=%h B=%h op=%b out=%h carry=%b zero=%b sign=%b parity=%b",
+             $time, A, B, op, out, carry, zero, sign, parity);
 
     // Addition
-    ALU_Sel = 4'b0000;
+    A = 16'h000F;
+    B = 16'h0001;
+    op = 3'b000;
     #10;
 
     // Subtraction
-    ALU_Sel = 4'b0001;
+    A = 16'h000F;
+    B = 16'h0001;
+    op = 3'b001;
     #10;
 
     // AND
-    ALU_Sel = 4'b0010;
+    A = 16'hAAAA;
+    B = 16'hCCCC;
+    op = 3'b010;
     #10;
 
     // OR
-    ALU_Sel = 4'b0011;
+    A = 16'hAAAA;
+    B = 16'hCCCC;
+    op = 3'b011;
     #10;
 
     // XOR
-    ALU_Sel = 4'b0100;
+    A = 16'hAAAA;
+    B = 16'hCCCC;
+    op = 3'b100;
     #10;
 
     // NOT
-    ALU_Sel = 4'b0101;
+    A = 16'hAAAA;
+    B = 16'h0000;
+    op = 3'b101;
     #10;
 
-    // Left Shift
-    ALU_Sel = 4'b0110;
+    // Increment
+    A = 16'h000F;
+    B = 16'h0000;
+    op = 3'b110;
     #10;
 
-    // Right Shift
-    ALU_Sel = 4'b0111;
+    // Decrement
+    A = 16'h000F;
+    B = 16'h0000;
+    op = 3'b111;
     #10;
 
-    // Compare
-    ALU_Sel = 4'b1000;
+    // Zero flag test
+    A = 16'h000A;
+    B = 16'h000A;
+    op = 3'b001;
     #10;
 
-
-    // --------------------------------
-    // Carry Test
-    // --------------------------------
-
+    // Sign flag test
     A = 16'hFFFF;
     B = 16'h0001;
-    ALU_Sel = 4'b0000;
+    op = 3'b000;
     #10;
-
-
-    // --------------------------------
-    // Signed Overflow Test
-    // 7FFF + 0001 = 8000
-    // --------------------------------
-
-    A = 16'h7FFF;
-    B = 16'h0001;
-    ALU_Sel = 4'b0000;
-    #10;
-
-
-    // --------------------------------
-    // Subtraction Borrow Test
-    // 0000 - 0001
-    // --------------------------------
-
-    A = 16'h0000;
-    B = 16'h0001;
-    ALU_Sel = 4'b0001;
-    #10;
-
-
-    // --------------------------------
-    // Zero Test
-    // --------------------------------
-
-    A = 16'h0000;
-    B = 16'h0000;
-    ALU_Sel = 4'b0010;
-    #10;
-
-
-    // --------------------------------
-    // Shift Carry Test
-    // --------------------------------
-
-    A = 16'h8001;
-    B = 16'h0000;
-
-    // Left shift
-    ALU_Sel = 4'b0110;
-    #10;
-
-    // Right shift
-    ALU_Sel = 4'b0111;
-    #10;
-
 
     $finish;
 
