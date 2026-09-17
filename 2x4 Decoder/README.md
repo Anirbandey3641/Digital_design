@@ -141,3 +141,41 @@ The Vivado RTL schematic confirms that the decoder is implemented as a purely **
 ### RTL Schematic
 
 ![2-to-4 Decoder RTL Schematic](rtl_schematic/Screenshot (271).png)
+
+## Simulation Waveform
+
+The behavioral simulation waveform demonstrates the relationship between the two input signals and the four decoded outputs.
+
+The waveform confirms that only the corresponding output becomes HIGH for each input combination.
+
+### Simulation Waveform
+
+![Simulation Waveform](simulation/waveform.png)
+
+---
+
+## Project Structure
+
+```text
+Decoder_2to4/
+│
+├── decoder_2to4.v
+├── decoder_2to4_tb.v
+├── README.md
+│
+├── simulation/
+│   └── waveform.png
+│
+└── rtl_schematic/
+    └── decoder_rtl.png
+
+```
+## Conclusion
+
+This project demonstrates the successful implementation of a **2-to-4 binary decoder using Verilog HDL**.
+
+The decoder converts a 2-bit binary input into one of four mutually exclusive active-HIGH outputs. The design uses basic NOT and AND logic to implement the required Boolean expressions.
+
+All four possible input combinations were tested using a self-checking testbench, and the decoder successfully produced the expected one-hot output for each input combination.
+
+The project provides a practical understanding of **combinational logic, binary decoding, Boolean expressions, Verilog HDL, simulation, and RTL schematic analysis**.
