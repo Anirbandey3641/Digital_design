@@ -150,7 +150,7 @@ The waveform confirms that only the corresponding output becomes HIGH for each i
 
 ### Simulation Waveform
 
-![Simulation Waveform](simulation/waveform.png)
+![Simulation Waveform](Simulation/Screenshot (269).png)
 
 ---
 
@@ -179,3 +179,15 @@ The decoder converts a 2-bit binary input into one of four mutually exclusive ac
 All four possible input combinations were tested using a self-checking testbench, and the decoder successfully produced the expected one-hot output for each input combination.
 
 The project provides a practical understanding of **combinational logic, binary decoding, Boolean expressions, Verilog HDL, simulation, and RTL schematic analysis**.
+
+---
+
+## Author
+
+**Anirban Dey**
+
+B.Tech — Electronics & VLSI  
+Maulana Abul Kalam Azad University of Technology, West Bengal
+
+**GitHub:**  
+https://github.com/Anirbandey3641/Digital_design
