@@ -54,13 +54,13 @@ The register changes its stored value only on the **positive edge of the clock**
 The basic operation can be represented as:
 
 ```text
-             ┌─────────────────────┐
-data_in[15:0] ───►                 │
-                  │   16-Bit       │───► data_out[15:0]
-clk ─────────────►│   Register     │
-reset ───────────►│                 │
-enable ──────────►│                 │
-             └─────────────────────┘
+                  ┌─────────────────────┐
+data_in[15:0] ───►                      │
+                  │        16-Bit       │───► data_out[15:0]
+clk ─────────────►│        Register     │
+reset ───────────►│                     │
+enable ──────────►│                     │
+                  └─────────────────────┘
 
 ```
 ---
@@ -72,7 +72,7 @@ It also demonstrates that the register retains its previous value when `enable` 
 
 ### Simulation Waveform
 
-![16-Bit Register Simulation Waveform](simulation/waveform.png)
+![16-Bit Register Simulation Waveform](Simulation/simulation.png)
 
 ---
 
@@ -86,7 +86,7 @@ The RTL schematic confirms that the design is implemented as a **sequential logi
 
 ### RTL Schematic
 
-![16-Bit Register RTL Schematic](rtl_schematic/register_rtl.png)
+![16-Bit Register RTL Schematic](synthesis/Rtl_schematic.png)
 
 ---
 
