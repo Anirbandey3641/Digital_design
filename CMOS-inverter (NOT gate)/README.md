@@ -62,7 +62,7 @@ At this region, the input and output voltages undergo a rapid transition.
 
 ### DC Response
 
-![DC Response](Simulation/dc_response.png)
+![DC Response](Simulation/inverter_dcresponse.jpeg)
 
 ---
 
@@ -72,5 +72,95 @@ A transient simulation was performed using a digital input pattern.
 
 The applied input pattern was:
 
-```text
 1001001
+
+Since the circuit performs logical inversion, the corresponding output pattern is:
+
+0110110
+
+The transient response confirms the expected NOT-gate operation.
+
+
+## Transient Response
+
+
+Logic Operation
+
+| Vin | Vout |
+| :---: | :---: |
+| 0 | 1 |
+| 1 | 0 |
+
+---
+
+Therefore:
+
+Vout = NOT(Vin)
+
+For the applied input pattern:
+
+Input  = 1001001
+
+Output = 0110110
+
+## Simulation Results
+
+The simulations demonstrate that:
+
+The CMOS inverter performs the expected logical inversion.
+The DC analysis produces the expected voltage-transfer characteristic.
+The switching region occurs near the middle of the 1.8 V supply range.
+The observed switching/operating point is approximately 883.23 mV.
+The transient response confirms correct inversion of the applied digital input pattern.
+
+## Tools Used
+
+Cadence Virtuoso
+CMOS transistor-level design
+DC Analysis
+Transient Analysis
+Conclusion
+
+---
+
+## Key Learning Outcomes
+
+Through this project, the following concepts were explored:
+
+- CMOS inverter architecture
+- PMOS and NMOS transistor operation
+- CMOS logic-level inversion
+- Voltage Transfer Characteristic (VTC)
+- Switching-point analysis
+- DC sweep analysis
+- Transient analysis
+- Digital input pattern verification
+- Cadence Virtuoso simulation workflow
+- Basic transistor-level digital circuit design
+
+---
+
+## Key Result
+
+The CMOS inverter successfully demonstrated NOT-gate functionality with a 1.8 V supply.
+
+The observed switching/operating point from the DC analysis was:
+
+**VSW ≈ 883.23 mV**
+
+The transient simulation verified the following input-output relationship:
+
+```text
+Input  : 1001001
+Output : 0110110
+
+```
+## Author
+
+Anirban Dey
+
+B.Tech — Electronics & VLSI
+Maulana Abul Kalam Azad University of Technology, West Bengal
+
+GitHub:
+https://github.com/Anirbandey3641/Digital_design
