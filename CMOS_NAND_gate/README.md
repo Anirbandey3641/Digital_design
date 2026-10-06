@@ -21,8 +21,8 @@ The NAND gate consists of:
 
 | Transistor | Type | W | L |
 |------------|------|---|---|
-| PM1 | PMOS | 1.32 µm | 180 nm |
-| PM2 | PMOS | 1.32 µm | 180 nm |
+| PM1 | PMOS | 1.02 µm | 180 nm |
+| PM2 | PMOS | 1.02 µm | 180 nm |
 | NM1 | NMOS | 1 µm | 180 nm |
 | NM2 | NMOS | 1 µm | 180 nm |
 
@@ -92,8 +92,10 @@ The DC and transient simulations demonstrate the expected NAND logic functionali
 
 ## Author
 
-**Anirban Dey**
+Anirban Dey
 
-B.Tech – Electronics Engineering  
-Microelectronics and VLSI  
+B.Tech — Electronics & VLSI
 Maulana Abul Kalam Azad University of Technology, West Bengal
+
+GitHub:
+https://github.com/Anirbandey3641/Digital_design
